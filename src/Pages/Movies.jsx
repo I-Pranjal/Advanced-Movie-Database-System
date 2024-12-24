@@ -24,6 +24,9 @@ export default function Movies() {
 
   return (
     <div>
+      <h1 className='text-5xl font-mono'>
+        Welcome to Movies Management Dashboard
+      </h1>
        <MovieTable movies={movies} />
     </div>
   )
