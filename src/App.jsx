@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard';
 import Genre from './Pages/ManageGenre' ;
 import Users from './Pages/UserManagement';
 import Profile from './Pages/UserProfile'; 
+import Watchlist from './Pages/Watchlist';
 
 
 
@@ -30,6 +31,7 @@ function App() {
        <Route path='/genre' element={<Genre />} />
        <Route path='/usersmanagement' element={<Users />} />
        <Route path='/profile' element={<Profile />} />
+       <Route path='/watchlist' element={<Watchlist />} />
 
 
 

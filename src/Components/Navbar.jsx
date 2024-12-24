@@ -10,6 +10,7 @@ export default function Navbar() {
       <Link to='/genre'>Manage Genre</Link>
       <Link to='/usersmanagement'>Manage Users</Link>
       <Link to='/profile'>Profile</Link>
+      <Link to='/watchlist'>Watchlist</Link>
     </div>
   )
 }
