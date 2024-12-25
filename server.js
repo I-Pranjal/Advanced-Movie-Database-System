@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import express from 'express' ;
+import express, { response } from 'express' ;
 import cors from 'cors'; 
 import dotenv from 'dotenv' ; 
 
@@ -56,9 +56,16 @@ app.get('/reviews', async (req, res) => {
 });
 
 app.get('/watchlist', async (req, res) => {
+    const { Email_ID } = req.query ;
     try {
-        const watchlist = await WatchList.find(); 
+        let watchlist ; 
+        if(Email_ID){
+             watchlist = await WatchList.find({Email_ID}); 
+        }else{
+             watchlist = await WatchList.find(); 
+        }
         res.status(200).json(watchlist); 
+
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch watchlist' });
     }
@@ -72,6 +79,28 @@ app.get('/users', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch watchlist' });
     }
 });
+
+
+app.post('/login', async (req, res) => {
+    const { name, password } = req.body; 
+    try {
+        // Use await to resolve the promise
+        const myuser = await UserDetails.findOne({ Name : name }); 
+
+        if (!myuser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        if(myuser.password != password){
+            return res.status(404).json({message : "Incorrect Password"}); 
+        }
+
+        res.status(200).json(myuser); 
+    } catch (err) {
+        console.error("The POST request could not be completed: ", err); 
+        res.status(500).json({ message: "Internal server error" }); 
+    }
+});
+
 
 
 

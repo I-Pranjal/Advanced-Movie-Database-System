@@ -50,8 +50,8 @@ const WatchListTable = ({ users }) => {
           </tr>
         </thead>
         <tbody>
-          {currentUsers.map((user) => (
-            <tr key={user.User_ID} className="odd:bg-white even:bg-gray-100 text-black">
+          {currentUsers.map((user, index) => (
+            <tr key={index} className="odd:bg-white even:bg-gray-100 text-black">
               <td className="border border-gray-300 px-4 py-2">{user.User_ID}</td>
               <td className="border border-gray-300 px-4 py-2">{user.Movie_ID}</td>
               <td className="border border-gray-300 px-4 py-2">{user.Email_ID}</td>

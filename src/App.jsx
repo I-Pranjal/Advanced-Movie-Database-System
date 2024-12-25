@@ -8,24 +8,23 @@ import Genre from './Pages/ManageGenre' ;
 import Users from './Pages/UserManagement';
 import Profile from './Pages/UserProfile'; 
 import Watchlist from './Pages/Watchlist';
+import Home from './Pages/Home';
+import { UserProvider } from './useContext.jsx';
 
 
 
 function App() {  
 
+
   return (
+    <UserProvider>
+
     <>
 
     <Router>
         <Navbar />  
       <Routes>
-        <Route path='/' element={
-          <>
-              <h1 className='font-mono text-6xl'>
-              Welcome to my Movie Database System
-              </h1>
-          </>
-        } />
+        <Route path='/' element={<Home />} />
        <Route path='/movies' element={<Movies />} />
        <Route path='/dashboard' element={<Dashboard />} />
        <Route path='/genre' element={<Genre />} />
@@ -38,6 +37,7 @@ function App() {
       </Routes>
     </Router>
     </>
+    </UserProvider>
   )
 }
 
