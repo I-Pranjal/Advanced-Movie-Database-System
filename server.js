@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import express, { response } from 'express' ;
 import cors from 'cors'; 
 import dotenv from 'dotenv' ; 
+import jwt from 'jsonwebtoken' ; 
 
 import { Movies } from "./schemas.js";
 import { Genre } from "./schemas.js";
@@ -94,7 +95,13 @@ app.post('/login', async (req, res) => {
             return res.status(404).json({message : "Incorrect Password"}); 
         }
 
-        res.status(200).json(myuser); 
+        // Now if the userName and password are matching, we will reply with a token to the client 
+        const token = jwt.sign(
+            { User_ID : myuser.User_ID, Name : myuser.Name, Email_ID : myuser.Email_ID },
+      'movietoken',
+      { expiresIn: '1h' }
+        ) ; 
+        res.json({token}); 
     } catch (err) {
         console.error("The POST request could not be completed: ", err); 
         res.status(500).json({ message: "Internal server error" }); 

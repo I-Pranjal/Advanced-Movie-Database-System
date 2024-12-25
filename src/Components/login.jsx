@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useContext } from 'react';
 import {Link,  useNavigate } from 'react-router-dom';
 import {UserContext} from '../useContext'
+import { jwtDecode } from 'jwt-decode';
 
 
 export default function Login() {
@@ -35,9 +36,12 @@ export default function Login() {
           
               if (response.ok) {
                   alert("Login successful");
-                  const data =await  response.json();
-                  setUserName(data.Name); 
-                  setUserMail(data.Email_ID); 
+                  const data = await  response.json();
+                  localStorage.setItem('token', data.token); // Saved the token to the local Storage
+                  // const decodedToken = jwtDecode(data.token);        
+                  // const { Name, Email_ID } = decodedToken; 
+                  // setUserName(Name); 
+                  // setUserMail(Email_ID); 
                   navigate('/watchlist'); 
               } else {
                   console.log("Login failed:", response);
